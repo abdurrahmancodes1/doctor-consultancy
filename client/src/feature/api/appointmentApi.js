@@ -72,7 +72,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const appointmentApi = createApi({
   reducerPath: "appointmentApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.process.env.VITE_REACT_APP_API_URL,
+    baseUrl: import.meta.env.VITE_REACT_APP_API_URL,
     credentials: "include",
   }),
   tagTypes: ["Appointment", "AppointmentSingle", "BookedSlots"],
