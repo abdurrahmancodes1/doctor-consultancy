@@ -71,6 +71,8 @@ const Header = ({ showDashboardNav = false }) => {
 
     return [];
   };
+  console.log(import.meta.env.VITE_REACT_APP_API_URL);
+  console.log(import.meta.env);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white/95 backdrop-blur">

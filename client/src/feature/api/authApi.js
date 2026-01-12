@@ -9,7 +9,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     registerDoctor: builder.mutation({
       query: (data) => ({
-        url: "/doctor/register",
+        url: "doctor/register",
         method: "POST",
         body: data,
       }),
@@ -17,27 +17,27 @@ export const authApi = createApi({
 
     loginDoctor: builder.mutation({
       query: (data) => ({
-        url: "/doctor/login",
+        url: "doctor/login",
         method: "POST",
         body: data,
       }),
     }),
     registerPatient: builder.mutation({
       query: (data) => ({
-        url: "/patient/register",
+        url: "patient/register",
         method: "POST",
         body: data,
       }),
     }),
     loginPatient: builder.mutation({
       query: (data) => ({
-        url: "/patient/login",
+        url: "patient/login",
         method: "POST",
         body: data,
       }),
     }),
     getMe: builder.query({
-      query: () => "/me",
+      query: () => "me",
     }),
   }),
 });
