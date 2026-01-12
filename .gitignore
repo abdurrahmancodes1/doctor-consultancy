@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Env files
+.env
+*.env
+client/.env
+server/.env
+
+# Builds
+dist/
+build/
+.next/
