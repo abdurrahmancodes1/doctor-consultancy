@@ -23,7 +23,7 @@ const PrescriptionViewModel = ({ appointment, userType, trigger }) => {
         setTimeout(() => setCopied(false), 2000);
       }
     } catch (error) {
-      console.log(error);
+      console.log("error");
     }
   };
   const otherUser =

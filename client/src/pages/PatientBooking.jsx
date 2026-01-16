@@ -56,7 +56,7 @@ const PatientBooking = () => {
     { doctorId, date: selectedDate },
     { skip: !doctorId || !selectedDate }
   );
-  console.log(bookedData);
+  // console.log(bookedData);
   const handlePaymentSuccess = () => {
     setTimeout(() => {
       navigate("/dashboard/patient");
@@ -307,12 +307,12 @@ const PatientBooking = () => {
                       onContinue={() => setCurrentStep(3)}
                     />
                   )}
-                  {console.log(
+                  {/* {console.log(
                     "CHECKPOINT-PB-1 appointmentId:",
                     createdAppointmentId
-                  )}
-                  {console.log("CHECKPOINT-PB-2 patientName:", patientName)}
-                  {console.log("CHECKPOINT-PB-3 step:", currentStep)}
+                  )} */}
+                  {/* {console.log("CHECKPOINT-PB-2 patientName:", patientName)} */}
+                  {/* {console.log("CHECKPOINT-PB-3 step:", currentStep)} */}
 
                   {currentStep === 3 && (
                     <Payment

@@ -26,7 +26,7 @@ const updateDoctor = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Failed to update doctor profile",
     });
   }
 };
@@ -120,7 +120,7 @@ const doctorById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: `${error.message}falied from doctorById`,
+      message: `falied to fetch doctor by doctorById`,
     });
   }
 };
@@ -236,7 +236,7 @@ const doctorDashboard = async (req, res) => {
     console.error("Dashboard error", error);
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Failed to fetch dashboard",
     });
   }
 };

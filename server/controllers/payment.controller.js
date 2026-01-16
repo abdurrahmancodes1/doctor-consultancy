@@ -69,14 +69,9 @@ const createOrder = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Order create error:", error.message);
-    console.log("ORDER RAW ERROR:", error);
-    console.log("ORDER ERROR STACK:", error.stack);
-    console.log("ORDER ERROR FULL:", JSON.stringify(error, null, 2));
-
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "creating order razor pay failed",
     });
   }
 };
@@ -145,7 +140,7 @@ const verifyPayment = async (req, res) => {
       message: "Payment verified successfully",
     });
   } catch (error) {
-    console.error("Verify payment error:", error.message);
+    console.error("Verify payment");
 
     return res.status(500).json({
       success: false,

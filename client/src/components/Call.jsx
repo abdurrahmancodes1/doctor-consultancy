@@ -44,7 +44,7 @@ const Call = ({
         try {
           await memoizedJoinConsultation(appointment?._id);
         } catch (error) {
-          console.log("failed to update appointmenr", error);
+          console.log("failed to update appointment");
         }
 
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
@@ -83,9 +83,7 @@ const Call = ({
           showLayoutButton: true,
           onJoinRoom: () => {
             if (isComponentMountedRef.current) {
-              console.log(
-                `joined ${appointment.consutationType}:${appointment.zegoRoomId}`
-              );
+              console.log("joined");
             }
           },
           onLeaveRoom: () => {

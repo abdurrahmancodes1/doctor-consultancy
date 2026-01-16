@@ -78,7 +78,7 @@ const Payment = ({
     console.log("PAY-HANDLE", appointmentId);
 
     if (!appointmentId || !patientName) {
-      console.log("PAY BLOCK:", appointmentId, patientName);
+      // console.log("PAY BLOCK:", appointmentId, patientName);
       return;
     }
 

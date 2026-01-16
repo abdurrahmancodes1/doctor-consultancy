@@ -122,7 +122,7 @@ export const getBookedDoctorSlotDate = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Failed to get booked slot date",
     });
   }
 };
@@ -224,7 +224,7 @@ export const bookAppointment = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: error.message,
+      message: "booking appointment failed",
     });
   }
 };
@@ -271,7 +271,6 @@ export const getSingleAppointmentById = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to fetch appointment",
-      error: error.message,
     });
   }
 };

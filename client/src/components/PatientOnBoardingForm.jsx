@@ -42,7 +42,7 @@ const PatientOnBoardingForm = () => {
   const { data } = useGetMeQuery();
   // console.log(useGetMeQuery());
   // console.log(first);
-  console.log(data);
+  // console.log(data);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

@@ -7,7 +7,7 @@ const PublicAuthGuard = ({ children }) => {
   if (isLoading) return null;
   if (data) {
     const role = data.role;
-    console.log("PublicAuthGuard is hitted");
+    // console.log("PublicAuthGuard is hitted");
     if (!data.user?.isVerified) {
       return <Navigate to={`/onboarding/${role}`} replace />;
     }

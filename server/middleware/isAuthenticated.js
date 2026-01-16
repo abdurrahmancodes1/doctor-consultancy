@@ -13,12 +13,11 @@ const isAuthenticated = (req, res, next) => {
 
   try {
     const decoded = verifyToken(token);
-    console.log(decoded);
+
     req.user = decoded;
-    console.log(req.user.role);
+
     next();
   } catch (err) {
-    console.log("JWT ERROR:", err.message);
     return res.status(401).json({
       success: false,
       message: "Invalid or expired token",
