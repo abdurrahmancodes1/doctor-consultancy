@@ -124,7 +124,7 @@ const App = () => {
     {
       path: "/",
       element: (
-        <HomeGuard>
+        <HomeGuard allowedRole="doctor">
           <HomePage />
         </HomeGuard>
       ),
