@@ -1,6 +1,6 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Bell, Calendar, Stethoscope, User, Settings } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Bell, Calendar, Stethoscope, User, UserMinus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +13,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { useGetMeQuery } from "@/feature/api/authApi";
+import {
+  authApi,
+  useGetMeQuery,
+  useLogoutMutation,
+} from "@/feature/api/authApi";
+import { useDispatch } from "react-redux";
 
 // 🔴 Replace with Redux auth later
 const isAuthenticated = false;
@@ -38,6 +43,14 @@ const Header = ({ showDashboardNav = false }) => {
         email: data.user.email,
       }
     : null;
+  const dispatch = useDispatch();
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await logout();
+    dispatch(authApi.util.resetApiState());
+    navigate("/");
+  };
   const getDashboardNavigation = () => {
     if (!isAuthenticated || !showDashboardNav) return [];
 
@@ -180,13 +193,13 @@ const Header = ({ showDashboardNav = false }) => {
                   <DropdownMenuSeparator />
 
                   <DropdownMenuItem asChild>
-                    <Link
-                      to={`/${user.type}/settings`}
+                    <Button
+                      onClick={handleLogout}
                       className="flex items-center"
                     >
-                      <Settings className="w-4 h-4 mr-2" />
-                      Settings
-                    </Link>
+                      <UserMinus className="w-4 h-4 mr-2" />
+                      Logout
+                    </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

@@ -21,6 +21,7 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useGetMeQuery } from "@/feature/api/authApi";
 // import {} from "@radix-ui/react-select";
 
 const DoctorList = () => {
@@ -57,7 +58,7 @@ const DoctorList = () => {
       sortOrder: "desc",
     });
   };
-
+  const { meData } = useGetMeQuery();
   // 🔹 Count only active (non-default) filters
   const activeFilterCount = Object.entries(filters).filter(([key, value]) => {
     if (!value) return false;
@@ -362,7 +363,11 @@ const DoctorList = () => {
 
                   <div className="mt-auto">
                     <Link
-                      to={`/patient/booking/${doctor._id}`}
+                      to={
+                        meData?.user
+                          ? `/patient/booking/${doctor._id}`
+                          : "/login/patient"
+                      }
                       className="block"
                     >
                       <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg ply-2 text-sm font-medium shadow-lg hover:shadow-xl transition-all">
