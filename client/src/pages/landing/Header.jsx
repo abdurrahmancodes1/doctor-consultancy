@@ -57,8 +57,8 @@ const Header = ({ showDashboardNav = false }) => {
         {
           label: "Dashboard",
           icon: Calendar,
-          to: "/doctor/dashboard",
-          active: pathname.includes("/doctor/dashboard"),
+          to: "/dashboard/doctor",
+          active: pathname.includes("/dashboard/doctor"),
         },
         {
           label: "Appointments",

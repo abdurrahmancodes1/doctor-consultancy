@@ -57,7 +57,7 @@ const AuthForm = ({ type, role }) => {
       if (type === "login" && role === "doctor") {
         await loginDoctor(formData).unwrap();
         if (data?.user?.isVerified) {
-          navigate("/doctor/dashboard");
+          navigate("/dashboard/doctor");
         } else {
           navigate("/onboarding/doctor");
         }

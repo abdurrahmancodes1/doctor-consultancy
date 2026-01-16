@@ -81,7 +81,7 @@ const DoctorOnBoardingForm = () => {
       await updateDoctorOnBoarding(payload).unwrap();
 
       // await updateDoctorOnBoarding(formData).unwrap();
-      navigate("/doctor/dashboard");
+      navigate("/dashboard/doctor");
     } catch (error) {
       console.error("Profile updat failed", error);
     }

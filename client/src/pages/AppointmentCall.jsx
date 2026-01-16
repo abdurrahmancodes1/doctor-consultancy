@@ -23,7 +23,7 @@ const AppointmentCall = () => {
     name: meData.user.name,
     role: meData.role,
   };
-  console.log(meData.role);
+  // console.log(meData.role);
   const [joinAppointment] = useJoinAppointmentMutation();
   const [isNavigating, setIsNavigating] = useState(false);
   const handleCallEnd = useCallback(async () => {
@@ -31,7 +31,7 @@ const AppointmentCall = () => {
     try {
       setIsNavigating(true);
       if (meData.role === "doctor") {
-        navigate(`/doctor/dashboard?completedCall=${appointmentId}`, {
+        navigate(`/dashboard/doctor?completedCall=${appointmentId}`, {
           replace: true,
         });
       } else {
@@ -59,7 +59,7 @@ const AppointmentCall = () => {
   //   name: user.name,
   //   role: role,
   // };
-  console.log(currentUser);
+  // console.log(currentUser);
   return (
     <Call
       appointmentId={appointmentId}
