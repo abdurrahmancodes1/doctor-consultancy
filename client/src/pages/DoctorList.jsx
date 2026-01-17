@@ -1,4 +1,4 @@
-import { useListDoctorsQuery } from "@/feature/api/doctorApi";
+import { useListDoctorsQuery } from "../feature/api/doctorApi";
 import { FilterIcon, Loader2, MapPin, Search, Star, X } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -12,7 +12,6 @@ import {
   specializations,
 } from "../../utils/constant";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import {
   SelectItem,
   SelectTrigger,
@@ -21,6 +20,8 @@ import {
   SelectContent,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { useGetMeQuery } from "@/feature/api/authApi";
+import Loader from "@/components/common/Loader";
 import { useGetMeQuery } from "@/feature/api/authApi";
 // import {} from "@radix-ui/react-select";
 
@@ -47,6 +48,7 @@ const DoctorList = () => {
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
+  console.log(data);
 
   const clearFilters = () => {
     setFilters({
@@ -58,7 +60,7 @@ const DoctorList = () => {
       sortOrder: "desc",
     });
   };
-  const { meData } = useGetMeQuery();
+  const { data: meData } = useGetMeQuery();
   // 🔹 Count only active (non-default) filters
   const activeFilterCount = Object.entries(filters).filter(([key, value]) => {
     if (!value) return false;

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { healthcareCategories } from "../../../utils/constant"; // adjust path if needed
 import { Button } from "@/components/ui/button";
 import { useGetMeQuery } from "@/feature/api/authApi";
+import { Video } from "lucide-react";
 
 const LandingHero = () => {
   // const isAuthenticated = true;
@@ -18,7 +19,7 @@ const LandingHero = () => {
     if (isAuthenticated) {
       navigate("/doctor-list");
     } else {
-      navigate("/signup/patient");
+      navigate("/register/patient");
     }
   };
 
@@ -31,11 +32,12 @@ const LandingHero = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-blue-50 to-white">
+    <section className="py-20 mt-10 px-4 bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto text-center">
-        <h1 className="text-5xl md:text-6xl font-bold text-blue-900 leading-tight mb-6">
+        <h1 className="text-5xl md:text-6xl font-bold text-[#2563eb] leading-tight mb-6">
           The place where <br />
-          <span className="text-blue-900">doctors listen - to you</span>
+          <span className="text-[#2563eb]">doctors listen </span>
+          <span className="text-blue-800">- to you</span>
         </h1>
 
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -47,20 +49,11 @@ const LandingHero = () => {
           <Button
             onClick={handleBookConsultation}
             size="lg"
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-full px-8 py-3 text-lg"
+            className="w-full sm:w-auto px-12 text-lg py-6 bg-blue-600 text-white  rounded-full font-semibold hover:bg-brand-700 transition shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2"
           >
+            <Video size={20} className="w-12 h-12" />
             Book a video visit
           </Button>
-
-          <Link to="/login/doctor">
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 rounded-full px-8 py-3 text-lg"
-            >
-              Login as Doctor
-            </Button>
-          </Link>
         </div>
 
         {/* Healthcare categories */}
@@ -94,18 +87,34 @@ const LandingHero = () => {
         </section>
 
         {/* Trust indicators */}
-        <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-600">
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full" />
-            <span>500+ Certified Doctors</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full" />
-            <span>50,000+ Satisfied Patients</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full" />
-            <span>24/7 Available</span>
+        <div class="mt-20  lg:block bg-gray-50 border-y border-blue-100">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex justify-between items-center text-center divide-x divide-brand-200">
+              <div class="flex-1 px-4">
+                <div class="text-2xl font-bold text-blue-600 mb-1">500+</div>
+                <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  Certified Doctors
+                </div>
+              </div>
+              <div class="flex-1 px-4">
+                <div class="text-2xl font-bold text-blue-600 mb-1">50k+</div>
+                <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  Happy Patients
+                </div>
+              </div>
+              <div class="flex-1 px-4">
+                <div class="text-2xl font-bold text-blue-600 mb-1">4.9/5</div>
+                <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  Average Rating
+                </div>
+              </div>
+              <div class="flex-1 px-4">
+                <div class="text-2xl font-bold text-blue-600 mb-1">24/7</div>
+                <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  Online Support
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

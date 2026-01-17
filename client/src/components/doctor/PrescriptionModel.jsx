@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { FileText, Save, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { AlertTitle } from "../ui/alert";
-import { Label } from "@radix-ui/react-dropdown-menu";
+import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
 const PrescriptionModel = ({

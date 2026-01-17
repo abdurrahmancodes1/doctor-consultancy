@@ -2,20 +2,20 @@ import { useGetMeQuery } from "@/feature/api/authApi";
 import { useUpdatePatientOnboardingMutation } from "@/feature/api/patientApi";
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent } from "../../components/ui/card";
 import { Phone, User } from "lucide-react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Label } from "../../components/ui/label";
+import { Input } from "../../components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { Button } from "./ui/button";
-import { Alert, AlertDescription } from "./ui/alert";
-import { Textarea } from "./ui/textarea";
+} from "../../components/ui/select";
+import { Button } from "../../components/ui/button";
+import { Alert, AlertDescription } from "../../components/ui/alert";
+import { Textarea } from "../../components/ui/textarea";
 // import { SelectTrigger } from "@radix-ui/react-select";
 
 const PatientOnBoardingForm = () => {
@@ -282,7 +282,7 @@ const PatientOnBoardingForm = () => {
                         onChange={(e) =>
                           handleMedicalHistoryChange(
                             "allergies",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="e.g., Penicillin, Peanuts, Dust (or write 'None' if not known allergies)"
@@ -299,7 +299,7 @@ const PatientOnBoardingForm = () => {
                         onChange={(e) =>
                           handleMedicalHistoryChange(
                             "currentMedications",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="List any medications you're currently taking (or write 'None' if not taking any medications)"
@@ -316,7 +316,7 @@ const PatientOnBoardingForm = () => {
                         onChange={(e) =>
                           handleMedicalHistoryChange(
                             "chronicConditions",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="e.g., Diabetes, Hypertension, Asthma (or write 'None' if no  chronical conditions)"

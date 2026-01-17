@@ -11,6 +11,8 @@ const PublicAuthGuard = ({ children }) => {
     if (!data.user?.isVerified) {
       return <Navigate to={`/onboarding/${role}`} replace />;
     }
+    console.log("AuthGuard is hitted from public");
+
     return <Navigate to={`/dashboard/${role}`} replace />;
   }
   return children;

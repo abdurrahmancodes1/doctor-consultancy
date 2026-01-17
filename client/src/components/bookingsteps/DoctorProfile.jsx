@@ -49,7 +49,7 @@ const DoctorProfile = ({ doctor }) => {
           </div>
 
           <div className="flex justify-center flex-wrap gap-2 mt-3">
-            {doctor.isVerified && (
+            {doctor?.isVerified && (
               <Badge
                 variant="secondary"
                 className="bg-green-100 text-green-700 border border-green-200 hover:bg-green-200"
@@ -58,7 +58,7 @@ const DoctorProfile = ({ doctor }) => {
                 Verified
               </Badge>
             )}
-            {doctor.category.map((cat, idx) => (
+            {doctor?.category?.map((cat, idx) => (
               <Badge
                 key={idx}
                 variant="secondary"
@@ -81,19 +81,19 @@ const DoctorProfile = ({ doctor }) => {
             </p>
           </div>
 
-          {doctor.hospitalInfo && (
+          {doctor?.hospitalInfo && (
             <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm">
               <h3 className="font-semibold text-gray-800 mb-1 text-xs uppercase tracking-wider">
                 Hospital/Clinic
               </h3>
               <div className="text-sm text-gray-600 space-y-1">
                 <p className="font-bold text-gray-900 text-base">
-                  {doctor.hospitalInfo.name}
+                  {doctor?.hospitalInfo.name}
                 </p>
-                <p>{doctor.hospitalInfo.address}</p>
+                <p>{doctor?.hospitalInfo.address}</p>
                 <div className="flex items-center space-x-1 mt-1 text-gray-500">
                   <MapPin className="w-3 h-3" />
-                  <span>{doctor.hospitalInfo.city}</span>
+                  <span>{doctor?.hospitalInfo.city}</span>
                 </div>
               </div>
             </div>

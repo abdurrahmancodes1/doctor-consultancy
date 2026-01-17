@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import Header from "../landing/Header";
-import PrescriptionModal from "../../components/doctor/PrescriptionModel";
+import Header from "../../landing/Header";
+import PrescriptionModal from "../../../components/doctor/PrescriptionModel";
 
 import { useGetMeQuery } from "@/feature/api/authApi";
 import {
@@ -26,24 +26,24 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "../../components/ui/avatar";
-import { Badge } from "../../components/ui/badge";
-import { Button } from "../../components/ui/button";
+} from "../../../components/ui/avatar";
+import { Badge } from "../../../components/ui/badge";
+import { Button } from "../../../components/ui/button";
 import {
   Card,
   CardHeader,
   CardContent,
   CardTitle,
-} from "../../components/ui/card";
+} from "../../../components/ui/card";
 
-import { getStatusColor } from "../../../utils/constant";
+import { getStatusColor } from "../../../../utils/constant";
+import Loader from "@/components/common/Loader";
 
 const DoctorDashboard = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const completedCallId = searchParams.get("completedCall");
 
-  const { data } = useGetMeQuery();
   const { data: rawDashboard, isLoading } = useGetDoctorDashboardQuery();
 
   const { data: currentAppointment, refetch } =
@@ -54,11 +54,10 @@ const DoctorDashboard = () => {
   const [endAppointment, { isLoading: modalLoading }] =
     useEndAppointmentMutation();
 
-  const [showPrescriptionModal, setShowPrescriptionModal] = useState(
-    !!completedCallId
-  );
+  const [showPrescriptionModal, setShowPrescriptionModal] =
+    useState(!!completedCallId);
   const [completingAppointmentId, setCompletingAppointmentId] = useState(
-    completedCallId || null
+    completedCallId || null,
   );
 
   useEffect(() => {
@@ -123,7 +122,9 @@ const DoctorDashboard = () => {
     return (
       <>
         <Header showDashboardNav={true} />
-        <div className="min-h-screen pt-16 p-6">Loading...</div>
+        <div>
+          <Loader />
+        </div>
       </>
     );
   }

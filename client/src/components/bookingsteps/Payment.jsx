@@ -1,8 +1,8 @@
-import { useGetMeQuery } from "@/feature/api/authApi";
+import { useGetMeQuery } from "../../feature/api/authApi";
 import {
   useCreateOrderMutation,
   useVerifyPayemntMutation,
-} from "@/feature/api/paymentApi";
+} from "../../feature/api/paymentApi";
 import React, { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
 import { AnimatePresence, motion } from "framer-motion";
@@ -37,7 +37,7 @@ const Payment = ({
   appointmentId,
   patientName,
 }) => {
-  console.log("PAY-PROPS:", appointmentId, patientName);
+  // console.log("PAY-PROPS:", appointmentId, patientName);
   const navigate = useNavigate();
 
   const { user } = useGetMeQuery();
@@ -75,7 +75,7 @@ const Payment = ({
   }, [appointmentId, patientName, paymentStatus, isPaymentLoading]);
 
   const handlePayment = async () => {
-    console.log("PAY-HANDLE", appointmentId);
+    // console.log("PAY-HANDLE", appointmentId);
 
     if (!appointmentId || !patientName) {
       // console.log("PAY BLOCK:", appointmentId, patientName);

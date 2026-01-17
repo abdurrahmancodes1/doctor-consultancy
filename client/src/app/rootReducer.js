@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import authReducer from "../feature/authSlice";
+// import authReducer from "../feature/authSlice";
 // import patientReducer from "./patientSlice";
 import { authApi } from "../feature/api/authApi";
 import { patientApi } from "@/feature/api/patientApi";
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   [doctorApi.reducerPath]: doctorApi.reducer,
   [appointmentApi.reducerPath]: appointmentApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
-  auth: authReducer,
+  // auth: authReducer,
   // patient: patientReducer,
 });
 export default rootReducer;

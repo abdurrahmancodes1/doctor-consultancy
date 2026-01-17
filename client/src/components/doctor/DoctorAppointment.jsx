@@ -1,6 +1,5 @@
-import AppointmentCard from "@/components/AppointmentCard";
-import EmptyState from "@/components/EmptyState";
-
+import AppointmentCard from "../patient/AppointmentCard";
+import EmptyState from "../common/EmptyState";
 import React, { useState } from "react";
 import Header from "../../pages/landing/Header";
 import { useGetMeQuery } from "@/feature/api/authApi";
@@ -11,9 +10,9 @@ import {
 
 import { Calendar, Clock, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import DoctorAppointmentCard from "./DoctorAppointmentCard";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Button } from "../ui/button";
+import DoctorAppointmentCard from "@/pages/dashboard/doctor/DoctorAppointmentCard";
 
 const DoctorAppointment = () => {
   const [activeTab, setActiveTab] = useState("upcoming");
@@ -53,7 +52,7 @@ const DoctorAppointment = () => {
     }));
 
   const validUpcoming = rawUpcoming.filter(
-    (apt) => new Date(apt.slotEndIso ?? apt.slotStartIso) >= now
+    (apt) => new Date(apt.slotEndIso ?? apt.slotStartIso) >= now,
   );
 
   // Final hybrid buckets

@@ -15,7 +15,11 @@ import {
 import { motion } from "framer-motion";
 
 import { useGetDoctorByIdQuery } from "@/feature/api/doctorApi";
-import { toLocalYMD, minutesToTime, convertTo24Hour } from "../../utils/helper";
+import {
+  toLocalYMD,
+  minutesToTime,
+  convertTo24Hour,
+} from "../../../../utils/helper";
 import { AnimatePresence } from "framer-motion";
 // import CalendarStep from "@/components/bookingsteps/CalendarStep";
 // import ConsultantStep from "@/components/bookingsteps/ConsultantStep";
@@ -28,6 +32,8 @@ import DoctorProfile from "@/components/bookingsteps/DoctorProfile";
 const PatientBooking = () => {
   const params = useParams();
   const doctorId = params.id;
+  console.log("Booking mount", doctorId);
+
   // console.log(params);
   // const navigate = useNavigate();
   // const { data, isLoading } = useGetDoctorAppointmentsQuery();
@@ -42,8 +48,10 @@ const PatientBooking = () => {
   const [consultationType, setConsultationType] =
     useState("Video Consultation");
   const navigate = useNavigate();
-  const today = new Date().toISOString().split("T")[0];
-  const [selectedDate, setSelectedDate] = useState(today);
+  // const today = new Date().toISOString().split("T")[0];
+  // const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const [bookAppointment, { isLoading: appointmentLoading }] =
     useBookAppointmentMutation();
   const [symptoms, setSymptoms] = useState();
@@ -54,7 +62,7 @@ const PatientBooking = () => {
   const [patientName, setPatientName] = useState("");
   const { data: bookedData } = useGetBookedSlotsQuery(
     { doctorId, date: selectedDate },
-    { skip: !doctorId || !selectedDate }
+    { skip: !doctorId || !selectedDate },
   );
   // console.log(bookedData);
   const handlePaymentSuccess = () => {
@@ -76,7 +84,7 @@ const PatientBooking = () => {
     today.setHours(0, 0, 0, 0);
 
     const iterationStart = new Date(
-      Math.max(today.getTime(), startDate.getTime())
+      Math.max(today.getTime(), startDate.getTime()),
     );
     const dates = [];
     for (
@@ -135,12 +143,12 @@ const PatientBooking = () => {
       const dateString = toLocalYMD(selectedDate);
 
       const slotStart = new Date(
-        `${dateString}T${convertTo24Hour(selectedSlot)}`
+        `${dateString}T${convertTo24Hour(selectedSlot)}`,
       );
 
       const slotEnd = new Date(
         slotStart.getTime() +
-          (doctorData?.doctor?.slotDurationMinutes || 30) * 60000
+          (doctorData?.doctor?.slotDurationMinutes || 30) * 60000,
       );
 
       const consultationFees = getConsultationPrice();
@@ -242,8 +250,8 @@ const PatientBooking = () => {
                         currentStep > step
                           ? "bg-blue-600 border-blue-600"
                           : currentStep === step
-                          ? "border-blue-600 text-blue-600"
-                          : "border-gray-300"
+                            ? "border-blue-600 text-blue-600"
+                            : "border-gray-300"
                       }`}
                     >
                       {currentStep > step ? (
@@ -257,8 +265,8 @@ const PatientBooking = () => {
                       {step === 1
                         ? "Select Time"
                         : step === 2
-                        ? "Details"
-                        : "Payment"}
+                          ? "Details"
+                          : "Payment"}
                     </span>
                   </div>
 
@@ -280,7 +288,7 @@ const PatientBooking = () => {
                 <AnimatePresence mode="wait">
                   {currentStep === 1 && (
                     <CalendarStep
-                      selectedDate={selectedDate}
+                      selectedDate={(d) => d && setSelectedDate(new Date(d))}
                       selectedSlot={selectedSlot}
                       setSelectedDate={setSelectedDate}
                       setSelectedSlot={setSelectedSlot}

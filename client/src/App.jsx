@@ -1,35 +1,57 @@
 import React from "react";
-import { Button } from "./components/ui/button";
+// import { Button } from "./components/ui/button";
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
 import { RouterProvider } from "react-router";
-import AuthLayout from "./pages/AuthLayout";
+// import AuthLayout from "./pages/AuthLayout";
+// import DoctorLogin from "./pages/auth/DoctorLogin";
+// import DoctorRegister from "./pages/auth/DoctorRegister";
+// import PatientLogin from "./pages/auth/PatientLogin";
+// import PatientRegister from "./pages/auth/PatientRegister";
+// import DoctorOnBoarding from "./pages/onboarding/DoctorOnBoarding";
+// import OnBoardingGuard from "./guards/OnBoardingGuard";
+// import OnBoardingLayout from "./pages/layouts/OnBoardingLayout";
+// import PublicAuthGuard from "./guards/PublicAuthGuard";
+import AuthGaurd from "./guards/AuthGuard";
+import { useGetMeQuery } from "./feature/api/authApi";
+import HomeGuard from "./guards/HomeGuard";
+import HomePage from "./pages/HomePage";
+import PublicAuthGuard from "./guards/PublicAuthGuard";
+import AuthLayout from "./pages/layouts/AuthLayout";
+// import AuthLayout from "./pages/layouts/AuthLayout";
 import DoctorLogin from "./pages/auth/DoctorLogin";
 import DoctorRegister from "./pages/auth/DoctorRegister";
 import PatientLogin from "./pages/auth/PatientLogin";
 import PatientRegister from "./pages/auth/PatientRegister";
-// import DoctorOnBoarding from "./pages/onboarding/DoctorOnBoarding";
-import OnBoardingGuard from "./pages/onboarding/OnBoardingGuard";
-// import OnBoardingLayout from "./pages/layouts/OnBoardingLayout";
-import PublicAuthGuard from "./components/PublicAuthGuard";
-import AuthGaurd from "./components/AuthGuard";
-// import PatientOnBoarding from "./pages/onboarding/PatientOnBoarding";
-import PatientOnBoardingForm from "./components/PatientOnBoardingForm";
-import Test from "./Test";
-import DoctorOnBoardingForm from "./components/DoctorOnBoardingForm";
-import HomeGuard from "./components/HomeGuard";
-import DoctorDashboard from "./pages/dashboard/DoctorDashboard";
-import DashboardAuthGuard from "./components/DashboardAuthGuard";
-import PatientDashboard from "./pages/dashboard/PatientDashboard";
-import RoleGuard from "./components/RoleGuard";
-import { useGetMeQuery } from "./feature/api/authApi";
+import OnBoardingGuard from "./guards/OnBoardingGuard";
+import DoctorOnBoardingForm from "./pages/onboarding/DoctorOnBoardingForm";
+import PatientOnBoardingForm from "./pages/onboarding/PatientOnBoardingForm";
+import DoctorDashboard from "./pages/dashboard/doctor/DoctorDashboard";
+import DashboardAuthGuard from "./guards/DashboardAuthGuard";
+import PatientDashboard from "./pages/dashboard/patient/PatientDashboard";
 import DoctorList from "./pages/DoctorList";
-import PatientBooking from "./pages/PatientBooking";
+import PatientBooking from "./pages/dashboard/patient/PatientBooking";
 import DoctorAppointment from "./components/doctor/DoctorAppointment";
-import Call from "./components/Call";
-import AppointmentCall from "./pages/AppointmentCall";
-import ProfilePage from "./pages/DoctorProfile";
-// import { useLoadUserQuery } from "./feature/api/authApi";
+import AppointmentCall from "./pages/appointment/AppointmentCall";
+import ProfileLayout from "./pages/layouts/ProfileLayout";
+import Loader from "./components/common/Loader";
+// // import PatientOnBoarding from "./pages/onboarding/PatientOnBoarding";
+// import PatientOnBoardingForm from "./pages/onboarding/PatientOnBoardingForm";
+// import DoctorOnBoardingForm from "./pages/onboarding/DoctorOnBoardingForm";
+// import HomeGuard from "./guards/HomeGuard";
+// import DoctorDashboard from "./pages/dashboard/doctor/DoctorDashboard";
+// import DashboardAuthGuard from "./guards/DashboardAuthGuard";
+// import PatientDashboard from "./pages/dashboard/patient/PatientDashboard";
+// import RoleGuard from "./guards/RoleGuard";
+// import { useGetMeQuery } from "./feature/api/authApi";
+// import DoctorList from "./pages/DoctorList";
+// import PatientBooking from "./pages/dashboard/patient/PatientBooking";
+// import DoctorAppointment from "./components/doctor/DoctorAppointment";
+// import Call from "./components/Call";
+// import AppointmentCall from "./pages/appointment/AppointmentCall";
+// import ProfilePage from "./pages/DoctorProfile";
+// import ProfileLayout from "./pages/layouts/ProfileLayout";
+// // import { useLoadUserQuery } from "./feature/api/authApi";
 
 const App = () => {
   // useLoadUserQuery(); // 🔑
@@ -118,13 +140,13 @@ const App = () => {
   //   //   // },
   // ]);
   const { isLoading } = useGetMeQuery();
-  if (isLoading) return null;
+  if (isLoading) return <Loader />;
   const appRouter = createBrowserRouter([
     /* ================= HOME ================= */
     {
       path: "/",
       element: (
-        <HomeGuard allowedRole="doctor">
+        <HomeGuard notAllowed="doctor">
           <HomePage />
         </HomeGuard>
       ),
@@ -132,16 +154,40 @@ const App = () => {
 
     /* ================= AUTH ================= */
     {
-      element: (
-        <PublicAuthGuard>
-          <AuthLayout />
-        </PublicAuthGuard>
-      ),
+      element: <AuthLayout />,
       children: [
-        { path: "login/doctor", element: <DoctorLogin /> },
-        { path: "register/doctor", element: <DoctorRegister /> },
-        { path: "login/patient", element: <PatientLogin /> },
-        { path: "register/patient", element: <PatientRegister /> },
+        {
+          path: "login/doctor",
+          element: (
+            <PublicAuthGuard>
+              <DoctorLogin />
+            </PublicAuthGuard>
+          ),
+        },
+        {
+          path: "register/doctor",
+          element: (
+            <PublicAuthGuard>
+              <DoctorRegister />
+            </PublicAuthGuard>
+          ),
+        },
+        {
+          path: "login/patient",
+          element: (
+            <PublicAuthGuard>
+              <PatientLogin />
+            </PublicAuthGuard>
+          ),
+        },
+        {
+          path: "register/patient",
+          element: (
+            <PublicAuthGuard>
+              <PatientRegister />
+            </PublicAuthGuard>
+          ),
+        },
       ],
     },
 
@@ -175,7 +221,7 @@ const App = () => {
     {
       path: "/dashboard/patient",
       element: (
-        <DashboardAuthGuard allowedrole="patient">
+        <DashboardAuthGuard allowedRole="patient">
           <PatientDashboard />
         </DashboardAuthGuard>
       ),
@@ -186,7 +232,11 @@ const App = () => {
     },
     {
       path: "/patient/booking/:id",
-      element: <PatientBooking />,
+      element: (
+        <DashboardAuthGuard allowedRole="patient">
+          <PatientBooking />
+        </DashboardAuthGuard>
+      ),
     },
     {
       path: "/doctor/appointments",
@@ -201,8 +251,20 @@ const App = () => {
       element: <AppointmentCall />,
     },
     {
-      path: "/profile",
-      element: <ProfilePage />,
+      path: "/profile/doctor",
+      element: (
+        <DashboardAuthGuard allowedRole="doctor">
+          <ProfileLayout />
+        </DashboardAuthGuard>
+      ),
+    },
+    {
+      path: "/profile/patient",
+      element: (
+        <DashboardAuthGuard allowedRole="patient">
+          <ProfileLayout />
+        </DashboardAuthGuard>
+      ),
     },
   ]);
 

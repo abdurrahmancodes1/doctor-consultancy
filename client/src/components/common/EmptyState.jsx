@@ -1,7 +1,7 @@
 import { Calendar, Clock, FileText } from "lucide-react";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent } from "../ui/card";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const EmptyState = ({ tab }) => {
   const emptyStates = {

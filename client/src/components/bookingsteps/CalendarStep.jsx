@@ -3,7 +3,6 @@ import { convertTo24Hour, startOfDay, toLocalYMD } from "../../../utils/helper";
 import { Label } from "../ui/label";
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
-import { isPast } from "date-fns";
 import { CalendarIcon, Clock } from "lucide-react";
 
 const CalendarStep = ({
@@ -22,7 +21,7 @@ const CalendarStep = ({
   const displaySlots = showMoreSlots
     ? availableSlots
     : availableSlots.slice(0, 10);
-  console.log(bookedSlots);
+  // console.log(bookedSlots);
   const isSlotBooked = (slot) => {
     if (!selectedDate) return false;
     const dateString = toLocalYMD(selectedDate);
@@ -55,7 +54,7 @@ const CalendarStep = ({
       selectedDay.getDate(),
       +hour,
       +minutes,
-      0
+      0,
     );
 
     return slotDateTime.getTime() <= now.getTime() + 5 * 60 * 1000;
@@ -130,8 +129,8 @@ const CalendarStep = ({
                             isDisabled
                               ? "opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border-gray-200"
                               : isSelected
-                              ? "bg-blue-600 text-white shadow-lg"
-                              : "hover:border-blue-200 hover:bg-blue-50"
+                                ? "bg-blue-600 text-white shadow-lg"
+                                : "hover:border-blue-200 hover:bg-blue-50"
                           }`}
                           onClick={() => !isDisabled && setSelectedSlot(slot)}
                         >

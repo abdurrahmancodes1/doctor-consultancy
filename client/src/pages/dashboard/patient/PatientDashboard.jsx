@@ -1,9 +1,7 @@
-import AppointmentCard from "@/components/AppointmentCard";
-import EmptyState from "@/components/EmptyState";
-
-("use client");
+import AppointmentCard from "@/components/patient/AppointmentCard";
+import EmptyState from "@/components/common/EmptyState";
 import React, { useState } from "react";
-import Header from "../landing/Header";
+import Header from "../../landing/Header";
 import { useGetMeQuery } from "@/feature/api/authApi";
 import { useGetAppointmentsQuery } from "@/feature/api/appointmentApi";
 
@@ -50,7 +48,7 @@ const PatientDashboard = () => {
     }));
 
   const validUpcoming = rawUpcoming.filter(
-    (apt) => new Date(apt.slotEndIso ?? apt.slotStartIso) >= now
+    (apt) => new Date(apt.slotEndIso ?? apt.slotStartIso) >= now,
   );
 
   // Final hybrid buckets

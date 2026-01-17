@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
+import { Card, CardContent } from "../ui/card";
+import { Separator } from "../ui/separator";
 import { Eye, EyeOff } from "lucide-react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
-  useGetMeQuery,
   useLoginDoctorMutation,
   useLoginPatientMutation,
   useRegisterDoctorMutation,
@@ -20,51 +19,52 @@ const AuthForm = ({ type, role }) => {
     email: "",
     password: "",
   });
-  // const params = useParams();
-  // console.log(params);
   const navigate = useNavigate();
   const [registerDoctor, { isLoading: doctorLoading, error: doctorError }] =
     useRegisterDoctorMutation();
 
   const [registerPatient, { isLoading: patientLoading, error: patientError }] =
     useRegisterPatientMutation();
-  const [loginDoctor, { isLoading: doctorLogin }] = useLoginDoctorMutation();
-  const [loginPatient] = useLoginPatientMutation();
-  const isLoading = doctorLoading || patientLoading;
-  const error = doctorError || patientError;
-  const { data } = useGetMeQuery();
+  const [loginDoctor, { isLoading: doctorLogin, error: doctorLoginError }] =
+    useLoginDoctorMutation();
+  const [loginPatient, { isLoading: patientLogin, error: patientLoginError }] =
+    useLoginPatientMutation();
+  const isLoading =
+    doctorLoading || patientLoading || doctorLogin || patientLogin;
+  const error =
+    doctorError || patientError || patientLoginError || doctorLoginError;
   const [showPassword, setShowPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-  // const error = false;
-  // const loading = false;
+
   const isSignup = type === "register";
   const title = isSignup ? "Create a secure account" : "Welcome back";
-  const buttonText = isSignup ? "Create account" : "Sign in";
+  const buttonText = isSignup ? "Sign up" : "Login";
   const altLinkText = isSignup ? "Already a member?" : "Don't have an account?";
   const altLinkAction = isSignup ? "Sign in" : "Sign up";
   const altLinkPath = isSignup ? `/login/${role}` : `/register/${role}`;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (type === "register" && role === "doctor") {
-        await registerDoctor(formData).unwrap();
-        navigate("/onboarding/doctor");
+        const res = await registerDoctor(formData).unwrap();
+        return navigate("/onboarding/doctor");
       }
       if (type === "register" && role === "patient") {
-        await registerPatient(formData).unwrap();
-        navigate("/onboarding/patient");
+        const res = await registerPatient(formData).unwrap();
+        return navigate("/onboarding/patient");
       }
       if (type === "login" && role === "doctor") {
-        await loginDoctor(formData).unwrap();
-        if (data?.user?.isVerified) {
+        const res = await loginDoctor(formData).unwrap();
+        if (res?.user?.isVerified) {
           navigate("/dashboard/doctor");
         } else {
           navigate("/onboarding/doctor");
         }
       }
       if (type === "login" && role === "patient") {
-        await loginPatient(formData).unwrap();
-        if (data?.user?.isVerified) {
+        const res = await loginPatient(formData).unwrap();
+        if (res?.user?.isVerified) {
           navigate("/patient/dashboard");
         } else {
           navigate("/onboarding/patient");
@@ -74,15 +74,6 @@ const AuthForm = ({ type, role }) => {
       console.error(error);
     }
   };
-  // const { data, isError } = useGetMeQuery();
-  // console.log(data);
-  // console.log(data);
-  // useEffect(() => {
-  //   // if (isLoadingMe) return false;
-  //   if (!data.user.isVerified) {
-  //     navigate(`/onboarding/${data.role}`);
-  //   }
-  // }, [data]);
 
   return (
     <div className="w-full max-w-md mx-auto">
@@ -180,7 +171,7 @@ const AuthForm = ({ type, role }) => {
               disabled={isLoading || (isSignup && !agreeToTerms)}
             >
               {isLoading
-                ? `${isSignup ? "Creating" : "Signing"} in...`
+                ? `${isSignup ? "Signing Up" : "Logging in"}`
                 : buttonText}
             </Button>
           </form>
@@ -199,7 +190,7 @@ const AuthForm = ({ type, role }) => {
                 className="w-full rounded-full border-gray-300"
                 // onClick={handleGoogleAuth}
               >
-                {isSignup ? "Sign up" : "Sign in"} with Google
+                {isSignup ? "Sign up" : "Log in"} with Google
               </Button>
             </div>
           </div>

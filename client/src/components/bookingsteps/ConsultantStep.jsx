@@ -14,7 +14,7 @@ const ConsultantStep = ({
   onContinue,
 }) => {
   const getConsultationPrice = (selectedType = consultationType) => {
-    console.log(doctorFees);
+    // console.log(doctorFees);
     const typePrice =
       consultationTypes.find((ct) => ct.type === selectedType)?.price || 0;
     return Math.max(0, doctorFees + typePrice);
@@ -81,7 +81,7 @@ const ConsultantStep = ({
                     </div>
                   </div>
                 );
-              }
+              },
             )}
           </div>
         </div>

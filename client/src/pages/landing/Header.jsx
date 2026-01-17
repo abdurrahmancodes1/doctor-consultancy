@@ -122,6 +122,15 @@ const Header = ({ showDashboardNav = false }) => {
         <div className="flex items-center space-x-4">
           {!isAuthenticated ? (
             <>
+              <Link to="/login/doctor">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full text-gray-600 hover:bg-blue-50 rounded-sm px-6 py-2 text-lg"
+                >
+                  For Doctors
+                </Button>
+              </Link>
               <Link to="/login/patient">
                 <Button variant="ghost">Login</Button>
               </Link>
@@ -182,7 +191,11 @@ const Header = ({ showDashboardNav = false }) => {
 
                   <DropdownMenuItem asChild>
                     <Link
-                      to={`/${user.type}/profile`}
+                      to={
+                        user.type === "patient"
+                          ? "/profile/patient"
+                          : "/profile/doctor"
+                      }
                       className="flex items-center"
                     >
                       <User className="w-4 h-4 mr-2" />
@@ -194,11 +207,12 @@ const Header = ({ showDashboardNav = false }) => {
 
                   <DropdownMenuItem asChild>
                     <Button
+                      variant="outline "
                       onClick={handleLogout}
-                      className="flex items-center"
+                      className="flex  w-full justify-start text-red-600  "
                     >
-                      <UserMinus className="w-4 h-4 mr-2" />
-                      Logout
+                      <UserMinus className="w-4 flex  h-4 mr-2 text-red-500" />
+                      <span>Logout</span>
                     </Button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

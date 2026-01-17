@@ -1,35 +1,19 @@
-import { Avatar, AvatarImage } from "../../components/ui/avatar";
-import { Card, CardContent } from "../../components/ui/card";
-import { AvatarFallback } from "../../components/ui/avatar";
-import { Badge } from "../../components/ui/badge";
-import {
-  Calendar,
-  FileText,
-  MapPin,
-  Phone,
-  Star,
-  Video,
-  XCircle,
-} from "lucide-react";
-import { Button } from "../ui/button";
-import PrescriptionViewModel from "./PrescriptionViewModel";
+import { Avatar, AvatarImage } from "../ui/avatar";
+import { Card, CardContent } from "../ui/card";
+import { AvatarFallback } from "../ui/avatar";
+import { Badge } from "../ui/badge";
+import { Calendar, FileText, MapPin, Phone, Star, Video } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const DoctorAppointmentCard = ({
-  appointment,
-  isToday,
-  canJoinCall,
-  canMarkCancelled,
-  formatDate,
-  handleMarkCancelled,
-}) => (
+import { Button } from "../ui/button";
+import PrescriptionViewModel from "../doctor/PrescriptionViewModel";
+const AppointmentCard = ({ appointment, isToday, canJoinCall, formatDate }) => (
   <Card className="hover:shadow-lg transition-shadow">
     <CardContent className="p-6">
       <div className="flex flex-col md:flex-row md:items-start md:space-x-6">
         <Avatar className="w-20 h-20 mx-auto md:mx-0">
           <AvatarImage src={appointment.doctorId?.profileImage} />
           <AvatarFallback className="bg-blue-100 text-blue-600 font-semibold">
-            {appointment.patientId?.name?.charAt(0)}
+            {appointment.doctorId?.name?.charAt(0)}
           </AvatarFallback>
         </Avatar>
 
@@ -37,15 +21,15 @@ const DoctorAppointmentCard = ({
           <div className="flex flex-col md:flex-row md:justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-900">
-                {appointment.patientId?.name}
+                {appointment.doctorId?.name}
               </h3>
               <p className="text-gray-600">
-                Age : {appointment.patientId?.age}
+                {appointment.doctorId?.specialization}
               </p>
-
-              <p className="text-sm text-gray-600">
-                {appointment.patientId?.email}
-              </p>
+              <div className="flex items-center justify-center md:justify-start text-sm text-gray-500 gap-1">
+                <MapPin className="w-3 h-3" />
+                {appointment.doctorId?.hospitalInfo?.name}
+              </div>
             </div>
 
             <div className="mt-2">
@@ -98,19 +82,7 @@ const DoctorAppointmentCard = ({
                   </Button>
                 </Link>
               )}
-              <div>
-                {canMarkCancelled && canMarkCancelled(appointment) && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50 "
-                    onClick={() => handleMarkCancelled(appointment._id)}
-                  >
-                    <XCircle className="w-4 h-4 mr-2" />
-                    Mark Cancel
-                  </Button>
-                )}
-              </div>
+
               {appointment.status === "Completed" &&
                 appointment.prescription && (
                   <PrescriptionViewModel
@@ -143,4 +115,4 @@ const DoctorAppointmentCard = ({
   </Card>
 );
 
-export default DoctorAppointmentCard;
+export default AppointmentCard;

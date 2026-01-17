@@ -15,7 +15,9 @@ const OnBoardingGuard = ({ children, role }) => {
   }
 
   if (data.user?.isVerified) {
-    return <Navigate to={`/${data.role}/dashboard`} replace />;
+    console.log("AuthGuard is hitted");
+
+    return <Navigate to={`/dashboard/${data.role}`} replace />;
   }
 
   return children;

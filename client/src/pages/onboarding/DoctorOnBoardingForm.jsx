@@ -2,25 +2,25 @@ import { useGetMeQuery } from "@/feature/api/authApi";
 import { useUpdateDoctorOnboardingMutation } from "@/feature/api/doctorApi";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent } from "./ui/card";
-import { Label } from "./ui/label";
+import { Card, CardContent } from "../../components/ui/card";
+import { Label } from "../../components/ui/label";
 import {
   Select,
   SelectItem,
   SelectContent,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "../../components/ui/select";
 // import {} from "@radix-ui/react-select";
 import {
   healthcareCategories,
   healthcareCategoriesList,
   specializations,
-} from "../../utils/constant";
-import { Input } from "./ui/input";
-import { Checkbox } from "./ui/checkbox";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
+} from "../../../utils/constant";
+import { Input } from "../../components/ui/input";
+import { Checkbox } from "../../components/ui/checkbox";
+import { Button } from "../../components/ui/button";
+import { Textarea } from "../../components/ui/textarea";
 // import { specializations } from "utils/constant";
 
 const DoctorOnBoardingForm = () => {
@@ -426,7 +426,7 @@ const DoctorOnBoardingForm = () => {
                           <Checkbox
                             id={`day-${value}`}
                             checked={formData.availabilityTimeRange.excludedWeekdays.includes(
-                              value
+                              value,
                             )}
                             onCheckedChange={(checked) => {
                               setFormData((prev) => ({
@@ -440,7 +440,7 @@ const DoctorOnBoardingForm = () => {
                                         value,
                                       ]
                                     : prev.availabilityTimeRange.excludedWeekdays.filter(
-                                        (d) => d !== value
+                                        (d) => d !== value,
                                       ),
                                 },
                               }));
@@ -505,7 +505,7 @@ const DoctorOnBoardingForm = () => {
                             size="sm"
                             onClick={() => {
                               const newRange = formData.dailyTimeRange.filter(
-                                (_, i) => i !== index
+                                (_, i) => i !== index,
                               );
                               setFormData((prev) => ({
                                 ...prev,
