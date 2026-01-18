@@ -1,4 +1,4 @@
-🩺 Doctor Consultancy Platform - Technical Specification
+#🩺 Doctor Consultancy Platform - Technical Specification
 Version: 1.0
 Status: Prototype (End-to-End Working)
 Stack: MERN + RTK Query + ZegoCloud + Razorpay
