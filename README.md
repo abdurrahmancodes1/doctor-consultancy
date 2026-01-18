@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #🩺 Doctor Consultancy Platform - Technical Specification
+=======
+###🩺 Doctor Consultancy Platform - Technical Specification
+>>>>>>> a344079 (updated readme file)
 Version: 1.0
 Status: Prototype (End-to-End Working)
 Stack: MERN + RTK Query + ZegoCloud + Razorpay
@@ -162,11 +166,3 @@ Tag: BookedSlots : Invalidated immediately after a successful payment/booking to
 Tag: User : Invalidated on Profile Update/Onboarding completion.
 
 ---
-
-## 6. Future Roadmap
-
-[ ] Reviews System: Rating logic for Doctors.
-[ ] Refund Handling: Automated webhooks for failed/cancelled consultations.
-[ ] Multi-Doctor Clinics: Hierarchical account management.
-[ ] Notifications: SMS/Email integration via Twilio/SendGrid.
-[ ] Calendar UI: Visual calendar for availability management (Drag & Drop)
