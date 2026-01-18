@@ -134,7 +134,7 @@ const Header = ({ showDashboardNav = false }) => {
               <Link to="/login/patient">
                 <Button variant="ghost">Login</Button>
               </Link>
-              <Link to="/signup/patient">
+              <Link to="/register/patient">
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                   Book Consulting
                 </Button>

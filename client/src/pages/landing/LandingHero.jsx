@@ -27,7 +27,7 @@ const LandingHero = () => {
     if (isAuthenticated) {
       navigate(`/doctor-list?category=${encodeURIComponent(categoryTitle)}`);
     } else {
-      navigate("/signup/patient");
+      navigate("/register/patient");
     }
   };
 
